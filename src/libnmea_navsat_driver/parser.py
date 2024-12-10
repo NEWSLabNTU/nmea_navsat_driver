@@ -135,7 +135,11 @@ def convert_time_rmc(date_str, time_str):
     hours = int(time_str[0:2])
     minutes = int(time_str[2:4])
     seconds = int(time_str[4:6])
-    nanosecs = int(time_str[7:]) * pow(10, 9 - len(time_str[7:]))
+
+    if time_str[7:] != '':
+        nanosecs = int(time_str[7:]) * pow(10, 9 - len(time_str[7:]))
+    else:
+        nanosecs = 0
 
     unix_secs = calendar.timegm((years, months, days, hours, minutes, seconds))
     return (unix_secs, nanosecs)
